@@ -1,0 +1,66 @@
+﻿@model StudentRecord.Models.studentrecord
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>studentrecord</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Class)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Class)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Subjects)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Subjects)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Marks)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Marks)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

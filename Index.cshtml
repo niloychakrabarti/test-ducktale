@@ -1,0 +1,103 @@
+﻿@model IEnumerable<StudentRecord.Models.studentrecord>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <p>
+        @using (Html.BeginForm("Index","studentrecords",FormMethod.Get))
+        {
+        @Html.TextBox("search")<input type="submit" value="Search" />
+        @Html.DropDownList("filter", new List<SelectListItem>
+        {
+            new SelectListItem{ Text="Filter",Value=""},
+new SelectListItem{ Text="Name", Value = "Name" },
+new SelectListItem{ Text="Class", Value = "Class" },
+new SelectListItem{ Text="Subject", Value = "Subject" },
+new SelectListItem{ Text="Marks", Value = "Marks" },
+})
+
+        @Html.ActionLink("Create New", "Create")
+        }
+    </p>
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th> ID</th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Class
+                </th>
+                <th>
+                    Subject
+                </th>
+                <th>
+                    Marks
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Class)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subjects)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Marks)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script>
+$("#filters").change(function () {
+            Search();
+        });
+        function Search() {
+        var data = { search: $("#Search").val(), filter: $("#filters").val() };
+        $.ajax({
+            url: "/studentrecords/Search",
+            method: "post",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function (data) {
+                alert("Data Add Successfully");
+                Display();
+            }
+        });
+    }
+    </script>
+</body>
+</html>
